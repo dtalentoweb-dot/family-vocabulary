@@ -178,38 +178,6 @@
             audio.currentTime = 0;
         }
     }
-  (function() {
-    // 1. INYECTA EL CSS DE SCROLL AUTOMÁTICAMENTE
-    const style = document.createElement('style');
-    style.innerHTML = `
-      html, body { 
-        overflow-y: auto !important; 
-        height: 100% !important; 
-        margin: 0; 
-        padding: 0;
-      }
-      body { 
-        -webkit-overflow-scrolling: touch; 
-        display: block !important; 
-      }
-      /* Ajuste preventivo para que nada se salga de los lados en móvil */
-      * { max-width: 100%; box-sizing: border-box; }
-    `;
-    document.head.appendChild(style);
-
-    // 2. COMUNICACIÓN CON EL IFRAME (Moodle/H5P)
-    // Esto le dice al contenedor "mido tanto" para intentar ajustar el alto
-    function enviarAltura() {
-      const height = document.documentElement.scrollHeight;
-      window.parent.postMessage(height, '*');
-    }
-
-    window.addEventListener('load', enviarAltura);
-    window.addEventListener('resize', enviarAltura);
-    
-    // Ejecutarlo cada cierto tiempo por si hay elementos que cargan lento
-    setTimeout(enviarAltura, 1000);
-  })();
 </script>
 
 </body>
